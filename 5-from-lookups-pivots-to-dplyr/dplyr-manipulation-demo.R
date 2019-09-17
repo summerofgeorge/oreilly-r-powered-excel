@@ -17,9 +17,12 @@ names(teams)
 # Creates new columns based on exsiting columns
 
 # calculate new columns
+# Format: new_variables = formula
+
+mutate(teams, Wpct = W / (W + L))
+names(teams)
 
 teams <- mutate(teams, Wpct = W / (W + L))
-
 head(teams)
 
 # use existing functions
@@ -27,9 +30,12 @@ teams <- mutate(teams, logR = log(R),
                 logAB = log(AB),
                 logH = log(H))
 
+head(teams)
 
 # you can change data types as well. 
+# Make teamID stored as a character
 
+head(teams$teamID)
 is.character(teams$teamID)
 
 teams <- mutate(teams, teamIDchar = as.character(teamID))
@@ -38,24 +44,44 @@ names(teams)
 is.character(teams$teamIDchar)
 
 #### select() ####
-# Creates new columns based on exsiting columns
+# Selects selected columns
 
+teams_short <- select(teams,yearID, teamID, W, L)
+head(teams_short)
 
-modern <- select(teams,yearID, teamID, W, L)
-dim(modern)
-
+# Use functions to select
 winners <- select(teams, ends_with("ID"), ends_with("Win"))
-dim(winners)
+head(winners)
 
-winners2 <- select(teams, ends_with("Win"))
-dim(winners2)
+# Select by number index
+teams_one_through_five <- select(teams, 1:5)
+head(teams_one_through_five)
+
+# DROP variables with a minus sign
+teams_no_year <- select(teams, -yearID)
+teams_no_year$yearID
+
+# Or "deselect" by index number
+teams_less_five <- select(teams, -5)
+ncol(teams) - ncol(teams_less_five)
+
+# Dropping multiple variables -- pass through vector
+teams_no_year_lg <- select(teams, -c(yearID, lgID))
+teams_no_year_lg$yearID
+teams_no_year_lg$lgID
+
+teams_no_year_lg <- select(teams, -yearID, -lgID)
+teams_no_year_lg$yearID
+teams_no_year_lg$lgID
 
 
 #### rename() ####
 # Renames selected columns
 
-rename <- rename(teams, year = yearID, DivisionID = divID)
-names(rename)
+# Formatted as new_name = old_name
+
+new_names <- rename(teams, year = yearID, DivisionID = divID)
+names(new_names)
 
 # Enclose in quotations if you want more than one word. 
 rename <- rename(teams, year = yearID, "Division ID" = divID)
@@ -82,7 +108,7 @@ head(resort2)
 
 
 #### filter() ####
-# Reorders rows
+# Selects rows based on condition
 
 modern <- filter(teams, yearID >= 2000)
 
@@ -111,6 +137,7 @@ dim(ohio_modern_wc)
 # Aggregates values for each group
 
 teams_ID <- group_by(teams, teamID)
+teams_ID
 
 summarise(teams_ID, mean = mean(W),
           min = min(W),
@@ -118,9 +145,7 @@ summarise(teams_ID, mean = mean(W),
 
 
 teams_year <- group_by(teams, yearID)
+teams_year
 
 summarise(teams_year, mean = mean(W),
           sd = sd(W))
-
-
-

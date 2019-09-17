@@ -1,4 +1,4 @@
-#install.packages('nycflights13")
+# install.packages('nycflights13")
 
 library(nycflights13)
 data(package = "nycflights13")
@@ -17,7 +17,7 @@ write.xlsx(l, file = "C:/RFiles/nycflights.xlsx", asTable = TRUE)
 planes_xl <- read.xlsx("C:/RFiles/nycflights.xlsx", sheet = "planes")
 head(planes_xl)
 
-# the readxlway
+# the readxl way
 airports_xl <- read_excel("C:/Rfiles/nycflights.xlsx", sheet = "airports")
 head(airports_xl)
 

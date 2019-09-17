@@ -1,4 +1,7 @@
 # New dataset -- Sean Lahman's baseball stats
+# http://www.seanlahman.com/baseball-archive/statistics/
+# install.packages("Lahman")
+
 library(Lahman)
 
 # What datasets are available? 
@@ -51,6 +54,5 @@ head(hall_of_fame)
 
 
 people <- read_excel("C:/Rfiles/Baseball.xlsx", sheet = 3)
-# the errors have to do with 2/29/1900 not existing...
 
 

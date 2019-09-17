@@ -1,3 +1,4 @@
+library(tidyverse)
 library(readxl)
 
 region_1  <- read_excel("C:/RFiles/sales_report.xlsx", sheet = "region_1")
@@ -22,6 +23,7 @@ region_3$region <- 3
 head(region_3)
 
 # Now let's bind the rows
+
 
 sales_report <- bind_rows(region_1, region_2, region_3)
 dim(sales_report)
