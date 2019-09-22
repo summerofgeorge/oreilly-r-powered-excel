@@ -1,12 +1,14 @@
 library(tidyverse)
 
+
 library(Lahman)
 
 # Players table is stored as Master
 data("Master")
 data("HallOfFame")
 
-# Inner -- only records meeting each
+# Inner -- only records found in
+# both tables A and B
 
 lahman_inner <- inner_join(Master, HallOfFame)
 
@@ -23,12 +25,18 @@ View(lahman_inner)
 inner_join(select(Master, nameFirst, nameLast), HallOfFame)
 
 # Need to keep playerID in the running!
-inner_join(select(Master, nameFirst, nameLast, playerID), HallOfFame)
+lahman_inner_short <- inner_join(select(Master, nameFirst, nameLast, playerID), HallOfFame)
+dim(lahman_inner_short)
 
-# Ordering doesn't matter in inner join
+# Ordering of data frames doesn't matter in inner join
 dim(inner_join(HallOfFame, Master))
+dim(inner_join(Master, HallOfFame))
 
 # Compare to left join
+# Left join -- Keep all records
+# in Table A. If no match in B,
+# result is NA.
+
 lahman_left <- left_join(Master, HallOfFame)
 dim(lahman_left)
 

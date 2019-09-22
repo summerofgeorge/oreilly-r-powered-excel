@@ -13,6 +13,7 @@ head(region_3)
 # Region 2 -- convert to proper/title case
 # There's a package (or several) for that!
 # stringr comes with tidyverse
+# Equivalent to PROPER() in Excel 
 
 region_2$category <- str_to_title(region_2$category)
 head(region_2)
@@ -23,7 +24,7 @@ region_3$region <- 3
 head(region_3)
 
 # Now let's bind the rows
-
+# bind_rows from dplyr
 
 sales_report <- bind_rows(region_1, region_2, region_3)
 dim(sales_report)
