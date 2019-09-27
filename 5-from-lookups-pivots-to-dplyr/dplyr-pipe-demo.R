@@ -2,7 +2,6 @@
 # Connect multiple verbs into a "pipeline"
 # Ctrl + Shift + M
 
-
 library(tidyverse)
 library(Lahman)
 data("Teams")
